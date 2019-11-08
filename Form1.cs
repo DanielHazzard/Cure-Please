@@ -6093,7 +6093,19 @@
                               }
                               else if ( ( Form2.config.plBlink ) && ( !plStatusCheck ( StatusEffect.Blink ) ) && ( CheckSpellRecast ( "Blink" ) == 0 ) && ( HasSpell ( "Blink" ) ) )
                               {
-                                   CastSpell ( "<me>" , "Blink" );
+                                    if (Form2.config.Accession && Form2.config.blinkAccession && currentSCHCharges > 0 && HasAbility("Accession") && !plStatusCheck(StatusEffect.Accession))
+                                    {
+                                        JobAbility_Wait("Blink, Accession", "Accession");
+                                        return;
+                                    }
+
+                                    if (Form2.config.Perpetuance && Form2.config.blinkPerpetuance && currentSCHCharges > 0 && HasAbility("Perpetuance") && !plStatusCheck(StatusEffect.Perpetuance))
+                                    {
+                                        JobAbility_Wait("Blink, Perpetuance", "Perpetuance");
+                                        return;
+                                    }
+
+                                    CastSpell ( "<me>" , "Blink" );
                               }
                               else if ( ( Form2.config.plPhalanx ) && ( !plStatusCheck ( StatusEffect.Phalanx ) ) && ( CheckSpellRecast ( "Phalanx" ) == 0 ) && ( HasSpell ( "Phalanx" ) ) && JobChecker ( "Phalanx" ) == true )
                               {
@@ -6150,6 +6162,7 @@
 
                                    if ( Form2.config.Perpetuance && Form2.config.regenPerpetuance && currentSCHCharges > 0 && HasAbility ( "Perpetuance" ) && !plStatusCheck ( StatusEffect.Perpetuance ) )
                                    {
+                                        JobAbility_Wait("Regen, Perpetuance", "Perpetuance");
                                         return;
                                    }
 
